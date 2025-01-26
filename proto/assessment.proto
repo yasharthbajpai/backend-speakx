@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+service AssessmentService {
+    rpc fetchAssessments(AssessmentQuery) returns (AssessmentResult);
+}
+
+message AssessmentQuery {
+    int32 pageNumber = 1;
+    int32 itemsPerPage = 2;
+    string searchTerm = 3;
+}
+
+message EmptyRequest {}
+
+message AssessmentItem {
+    string id = 1;
+    string type = 2;
+    string title = 3;
+}
+
+message AssessmentResult {
+    repeated AssessmentItem assessments = 1;
+    int32 totalCount = 2;
+    int32 currentPage = 3;
+    int32 pageSize = 4;
+}
