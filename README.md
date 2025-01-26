@@ -1,109 +1,71 @@
-This project consists of a gRPC server and client alongside an Express.js REST API to handle questions data stored in MongoDB.
 
-"Project Structure" :
-  gRPC Server: Handles requests to fetch paginated and searchable question data.
+# Question Search API Documentation
 
-  gRPC Client: Communicates with the gRPC server to retrieve data.
+*Developed by Yasharth Bajpai*
 
-  Express API: Provides RESTful endpoints to interact with the question data.
+## Project Overview
+This project implements a gRPC server and client alongside an Express.js REST API to handle questions data stored in MongoDB.
 
+## Architecture
+- **gRPC Server**: Handles requests to fetch paginated and searchable question data
+- **gRPC Client**: Communicates with the gRPC server to retrieve data
+- **Express API**: Provides RESTful endpoints to interact with the question data
 
-"Installation" :
+## Setup Instructions
 
-  Clone the repository:
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/s4kenn/speakx-backend.git
 
-    git clone https://github.com/s4kenn/speakx-backend.git
+# Install dependencies
+npm i
+```
 
-  Install dependencies:
+### Configuration
+Create a `.env` file in the root directory:
+```env
+MONGO_URI=<your-mongodb-uri>
+GRPC_PORT=50051
+PORT=5000
+```
 
-    npm i
+### Running the Application
+```bash
+npm start
+```
 
-  Create a .env file in the root directory and configure the following:
+## Technical Implementation
 
-    MONGO_URI=<your-mongodb-uri>
-    GRPC_PORT=50051
-    PORT=5000
+### gRPC Server
+- Proto file location: `./proto/question.proto`
+- Service: QuestionService
+- Features:
+  - Pagination support
+  - Regex-based search
+  - MongoDB integration with Mongoose
 
-  Start MongoDB (if not already running).
+### Express API
+- **Endpoints**
+  - `GET /api/questions`: Fetch questions with optional query parameters
+- **Features**
+  - CORS enabled
+  - JSON parsing
+  - URL-encoded data handling
 
-"Running the Application" :
+## Tech Stack
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Runtime environment |
+| Express.js | REST API framework |
+| gRPC | Service communication |
+| MongoDB | Database |
+| Mongoose | ODM |
+| dotenv | Environment management |
 
-  Start gRPC Server & Express Server
+# Contributors
+[Yasharth Bajpai](https://github.com/yasharthbajpai) - Lead Developer  
+[Aditya Singh](https://github.com/s4kenn) - Contributor
 
-    npm start
-
-"gRPC Server" :
-
-  The gRPC server loads the question.proto file and exposes the following service:
-
-  getQuestions: Retrieves paginated and searchable questions from the MongoDB database.
-
-"Features" :
-
-  Pagination support
-
-  Search functionality using regex
-
-  MongoDB connection using Mongoose
-
-  Environment variable support with dotenv
-
-"gRPC Server Code Highlights" :
-
-  Proto File Path: ./proto/question.proto
-
-  Service Name: QuestionService
-
-  Functionality:
-
-    Accepts page, limit, and search query parameters
-
-    Responds with questions and total number of documents
-
-"gRPC Client" :
-
-  The gRPC client connects to the server and provides a way to fetch questions using the defined service.
-
-  Client Setup
-
-    Loads the same proto definition.
-
-    Connects to localhost:<GRPC_PORT>.
-
-    Handles data retrieval with specified request limits.
-
-"Express API" :
-
-  The Express.js server acts as a REST API to handle HTTP requests.
-
-  Routes
-
-    GET /api/questions - Fetch questions with optional query parameters (page, limit, search).
-
-  Features
-
-    CORS enabled
-
-    JSON request body parsing
-
-    URL-encoded data handling
-
-"Technologies Used" :
-
-  Node.js
-
-  Express.js
-
-  gRPC
-
-  MongoDB with Mongoose
-
-  dotenv
-
-  cors
-
-
-
-Contributors
-  Aditya Singh
-
+---
+*© 2024 Yasharth Bajpai. All rights reserved.*
